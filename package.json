@@ -4,6 +4,9 @@
   "main": "index.js",
   "repository": "https://github.com/pharrRevamp/Comms-Server.git",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

@@ -19,7 +19,7 @@ if (port == null || port == "") {
 app.get("/", (req, res) => {
   try {
     console.log(`SERVER STARTED UP`);
-    res.status(200).send(`Hello World from the comms server.`);
+    res.status(200).send(`Hello World from The Comms Server.`);
   } catch (err) {
     console.log(`SERVER IS UNABLE TO START UP.`);
     res.status(500).send(err);
@@ -28,5 +28,5 @@ app.get("/", (req, res) => {
 // Port Lister
 
 app.listen(port, () => {
-  console.log(`SERVER IS RUNNING ON PORT${port}`);
+  console.log(`SERVER IS RUNNING ON PORT:${port}`);
 });
