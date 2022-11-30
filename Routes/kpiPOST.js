@@ -11,8 +11,26 @@ async function close() {
 
 router.post("/kpi-data", async (req, res) => {
   const data = await req.body;
+  const {
+    avgDispatchTime,
+    numOfHrsTCO,
+    pctOfCallsUnder,
+    trainHoursEmpl,
+    numOfSpecProg,
+    pctOfBudgetUsed,
+    numOfBudgetAdju,
+    ttlNumOfCalls,
+    ttlNumOfCallsPharr,
+    ttlNumTrans,
+    ttlNumILA,
+    completionRate,
+    pctCriteria,
+    pctStaffCert,
+    pctCertObtained,
+  } = data;
+
   try {
-    const sqlString = ``;
+    const sqlString = `INSERT INTO dbo.CommsKPI (avgDispatchTime,numOfHrsTCO,pctOfCallsUnder,TrainHoursEmpl,numOfSpecProg,pctOfBudgetUsed,numOfBudgetAdju,TtlNumOfCalls,TtlNumOfCallsPharr,TtlNumTrans,TtlNumILA,CompletionRate,pctCriteria,pctStaffCert,pctCertObtained) VALUES ('${avgDispatchTime}','${numOfHrsTCO}','${pctOfCallsUnder}','${trainHoursEmpl}','${numOfSpecProg}','${pctOfBudgetUsed}','${numOfBudgetAdju}','${ttlNumOfCalls}','${ttlNumOfCallsPharr}','${ttlNumTrans}','${ttlNumILA}','${completionRate}','${pctCriteria}','${pctStaffCert}','${pctCertObtained}')`;
     const requestDB = await new sql.Request(pool);
 
     await pool
@@ -34,6 +52,7 @@ router.post("/kpi-data", async (req, res) => {
             .status(200)
             .send(`Software was successfully added into database at ${Date()}`);
           // end of query
+          close();
         });
         // end of then()
       })
@@ -52,3 +71,46 @@ router.post("/kpi-data", async (req, res) => {
 });
 
 module.exports = router;
+
+/* 
+average Dispatch time of emergency services -> avgDispatchTime
+number of Hours/TCO -> numOfHrsTCO
+percentage of calls answered within 15mins -> pctOfCallsUnder
+
+training hours/employee (annual) -> TrainHoursEmpl
+number of specialized programs -> numOfSpecProg
+percentage of budget used -> pctOfBudgetUsed
+number of budget adjustments -> numOfBudgetAdju
+
+total number of calls -> TtlNumOfCalls
+total number of calls in pharr -> TtlNumOfCallsPharr
+total number -> TtlNumTrans
+total number -> TtlNumILA
+
+Completion Rate -> CompletionRate
+percentage criteria -> pctCriteria
+percentage staff certified -> pctStaffCert
+
+percentage certifiations obtained -> pctCertObtained
+*/
+/*
+uuid:
+urlCode:
+date = 
+ avgDispatchTime = `${avgDispatchTime}` 
+ numOfHrsTCO = `${numOfHrsTCO}` 
+ pctOfCallsUnder = `${pctOfCallsUnder}` 
+ trainHoursEmpl = `${trainHoursEmpl}` 
+ numOfSpecProg = `${numOfSpecProg}` 
+ pctOfBudgetUsed = `${pctOfBudgetUsed}` 
+ numOfBudgetAdju = `${numOfBudgetAdju}` 
+ TtlNumOfCalls = `${TtlNumOfCalls}` 
+ TtlNumOfCallsPharr = `${TtlNumOfCallsPharr}` 
+ TtlNumTrans = `${TtlNumTrans}` 
+ TtlNumILA = `${TtlNumILA}` 
+ CompletionRate = `${CompletionRate}` 
+ pctCriteria = `${pctCriteria}` 
+ pctStaffCert = `${pctStaffCert}` 
+ pctCertObtained = `${pctCertObtained}` 
+
+*/
