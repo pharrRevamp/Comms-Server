@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const sql = require("mssql");
 const pool = require("../db");
+const auth = require("../middleware/auth");
 require("dotenv").config();
 
 const poolErr = `POOL CLOSED`;
@@ -9,7 +10,7 @@ async function close() {
   await pool.close();
 }
 
-router.get("/kpi-data", async (req, res) => {
+router.get("/kpi-data", auth, async (req, res) => {
   try {
     const sqlString = `SELECT * FROM dbo.CommsKPI`;
     const requestDB = await new sql.Request(pool);
@@ -54,7 +55,7 @@ router.get("/kpi-data", async (req, res) => {
 });
 /***********************************************************************************************/
 // Last request kpi stat
-router.get("/kpi-data-recent", async (req, res) => {
+router.get("/kpi-data-recent", auth, async (req, res) => {
   try {
     const sqlString = `SELECT TOP 1 * FROM dbo.CommsKPI ORDER BY uuid DESC`;
     const requestDB = await new sql.Request(pool);

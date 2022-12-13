@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const sql = require("mssql");
 const pool = require("../db");
+const auth = require("../middleware/auth");
 require("dotenv").config();
 
 const poolErr = `POOL CLOSED`;
@@ -9,7 +10,7 @@ async function close() {
   await pool.close();
 }
 
-router.post("/kpi-data", async (req, res) => {
+router.post("/kpi-data", auth, async (req, res) => {
   const data = await req.body;
   const {
     avgDispatchTime,
